@@ -1,11 +1,12 @@
 import os
 import pandas as pd
-from flask import Flask, render_template, request, send_file, flash, redirect, url_for, after_this_request
+from flask import Flask, render_template, request, send_file, flash, redirect, url_for
 import re
+import io
 
 app = Flask(__name__)
 app.secret_key = 'sua_chave_secreta_aqui'
-EXCEL_FILE_PATH = os.path.join(os.getcwd(), f'Arquivo.xlsx')  # Caminho do arquivo fixo
+EXCEL_FILE_PATH = os.path.join(os.getcwd(), 'Arquivo.xlsx')  # Caminho do arquivo fixo
 
 def processar_excel():
     df = pd.read_excel(EXCEL_FILE_PATH, header=None)
@@ -87,15 +88,16 @@ def filtrar():
         flash("Nenhum dado encontrado no intervalo de datas selecionado.")
         return redirect(url_for('index'))
 
-    filtered_file = 'resultado_filtrado_por_datas.xlsx'
+    # Criar um arquivo Excel em memória
+    output = io.BytesIO()
     try:
-        filtered_df.to_excel(filtered_file, index=False)
+        filtered_df.to_excel(output, index=False)
+        output.seek(0)  # Voltar para o início do BytesIO
     except Exception as e:
         flash(f"Erro ao salvar o arquivo filtrado: {e}")
         return redirect(url_for('index'))
 
-    response = send_file(filtered_file, as_attachment=True)
-    return response
+    return send_file(output, as_attachment=True, download_name='resultado_filtrado_por_datas.xlsx', mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
 
 if __name__ == '__main__':
     app.run(debug=True)

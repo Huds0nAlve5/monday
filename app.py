@@ -5,7 +5,7 @@ import re
 
 app = Flask(__name__)
 app.secret_key = 'sua_chave_secreta_aqui'
-EXCEL_FILE_PATH = os.path.join(os.getcwd(), 'Arquivo.xlsx')  # Caminho do arquivo fixo
+EXCEL_FILE_PATH = os.path.join(os.getcwd(), f'Arquivo.xlsx')  # Caminho do arquivo fixo
 
 def processar_excel():
     df = pd.read_excel(EXCEL_FILE_PATH, header=None)

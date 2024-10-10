@@ -2,34 +2,41 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Upload de Arquivo Excel</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 50px; }
-        .container { max-width: 500px; margin: auto; }
-        .alert { color: red; }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload e Filtragem de Dados Excel</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
     <div class="container">
-        <h1>Upload de Arquivo Excel</h1>
+        <header>
+            <h1>Upload e Filtragem de Dados Excel</h1>
+            <p>Faça o upload do seu arquivo Excel e selecione o intervalo de datas para filtrar os dados.</p>
+        </header>
+
         {% with messages = get_flashed_messages() %}
           {% if messages %}
-            <ul class="alert">
+            <ul class="flash-messages">
               {% for message in messages %}
                 <li>{{ message }}</li>
               {% endfor %}
             </ul>
           {% endif %}
         {% endwith %}
-        <form action="{{ url_for('upload_file') }}" method="POST" enctype="multipart/form-data">
-            <div>
+        
+        <form action="{{ url_for('index') }}" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
                 <label for="file">Selecione o arquivo Excel:</label>
                 <input type="file" name="file" id="file" accept=".xlsx, .xls" required>
             </div>
-            <br>
-            <div>
-                <button type="submit">Upload</button>
+            <div class="form-group">
+                <label for="inicio_date">Data de Início:</label>
+                <input type="date" id="inicio_date" name="inicio_date" required>
             </div>
+            <div class="form-group">
+                <label for="fim_date">Data de Fim:</label>
+                <input type="date" id="fim_date" name="fim_date" required>
+            </div>
+            <button type="submit" class="btn">Filtrar e Baixar</button>
         </form>
     </div>
 </body>

@@ -155,7 +155,7 @@ def index():
             except Exception as e:
                 flash(f"Erro ao filtrar os dados: {e}")
                 logger.exception('Erro ao filtrar os dados.')
-                return redirect(request.url)
+                return redirect(url_for('index'))
 
             if filtered_df.empty:
                 flash('Nenhum dado encontrado no intervalo de datas selecionado.')
@@ -180,13 +180,8 @@ def index():
                 mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
             )
 
-        else:
-            flash('Tipo de arquivo não permitido. Por favor, envie um arquivo .xlsx ou .xls')
-            logger.error('Tipo de arquivo não permitido enviado.')
-            return redirect(request.url)
-
-    # Rota para método GET
-    return render_template('upload.html')
+        # Rota para método GET
+        return render_template('upload.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

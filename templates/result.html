@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Resultado</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 50px; text-align: center; }
+        .container { max-width: 500px; margin: auto; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Arquivo Filtrado Gerado com Sucesso!</h1>
+        <p>Clique no botão abaixo para baixar o arquivo filtrado.</p>
+        <a href="{{ url_for('download_file', filename=filename) }}">
+            <button>Download</button>
+        </a>
+    </div>
+</body>
+</html>

@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Upload de Arquivo Excel</title>
+    <title>Filtrar Dados</title>
     <style>
         body { font-family: Arial, sans-serif; margin: 50px; }
         .container { max-width: 500px; margin: auto; }
@@ -11,7 +11,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Upload de Arquivo Excel</h1>
+        <h1>Filtrar Dados por Data</h1>
         {% with messages = get_flashed_messages() %}
           {% if messages %}
             <ul class="alert">
@@ -21,14 +21,20 @@
             </ul>
           {% endif %}
         {% endwith %}
-        <form action="{{ url_for('upload_file') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ url_for('filter_data') }}" method="POST">
+            <input type="hidden" name="unique_id" value="{{ unique_id }}">
             <div>
-                <label for="file">Selecione o arquivo Excel:</label>
-                <input type="file" name="file" id="file" accept=".xlsx, .xls" required>
+                <label for="start_date">Data de Início:</label>
+                <input type="date" id="start_date" name="start_date" required>
             </div>
             <br>
             <div>
-                <button type="submit">Upload</button>
+                <label for="end_date">Data de Fim:</label>
+                <input type="date" id="end_date" name="end_date" required>
+            </div>
+            <br>
+            <div>
+                <button type="submit">Filtrar e Salvar</button>
             </div>
         </form>
     </div>

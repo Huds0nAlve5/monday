@@ -3,3 +3,4 @@ pandas
 openpyxl
 serverless_wsgi
 werkzeug
+boto3

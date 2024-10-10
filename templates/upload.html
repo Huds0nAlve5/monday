@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload de Arquivo Excel</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 50px; }
+        .container { max-width: 500px; margin: auto; }
+        .alert { color: red; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Upload de Arquivo Excel</h1>
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <ul class="alert">
+              {% for message in messages %}
+                <li>{{ message }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+        <form action="{{ url_for('upload_file') }}" method="POST" enctype="multipart/form-data">
+            <div>
+                <label for="file">Selecione o arquivo Excel:</label>
+                <input type="file" name="file" id="file" accept=".xlsx, .xls" required>
+            </div>
+            <br>
+            <div>
+                <button type="submit">Upload</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

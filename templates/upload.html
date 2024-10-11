@@ -3,21 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Upload de Arquivo</title>
+    <title>Relatório monday</title>
+    <link rel="stylesheet" href="../static/styles.css">
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
 </head>
 <body>
-    <h1>Upload do Arquivo Excel</h1>
-    <form action="/process" method="post" enctype="multipart/form-data">
-        <label for="file">Escolha um arquivo:</label>
-        <input type="file" name="file" accept=".xlsx" required><br><br>
+    <div id="form-area">
+        <h1>Upload do arquivo excel</h1>
+        <form action="/process" method="post" enctype="multipart/form-data">
+            <label for="file" class="label">Escolha o arquivo:</br></label>
+            <input type="file" name="file" accept=".xlsx" required><br><br>
 
-        <label for="inicio_date">Data de Início:</label>
-        <input type="date" name="inicio_date" required><br><br>
+            <label for="inicio_date" class="label">Data inicial:</label>
+            <input type="date" name="inicio_date" required><br><br>
 
-        <label for="fim_date">Data de Fim:</label>
-        <input type="date" name="fim_date" required><br><br>
+            <label for="fim_date" class="label">Data final:</label>
+            <input type="date" name="fim_date" required><br><br>
 
-        <button type="submit">Enviar</button>
-    </form>
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
 </body>
 </html>
